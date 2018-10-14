@@ -1,7 +1,7 @@
 {
     "app-id": "org.gnome.Books",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.26",
+    "runtime-version": "3.30",
     "branch": "stable",
     "sdk": "org.gnome.Sdk",
     "command": "gnome-books",
@@ -25,9 +25,7 @@
         "cflags": "-O2 -g",
         "cxxflags": "-O2 -g",
         "env": {
-            "V": "1",
-            "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_GIRDIR": "/app/share/gir-1.0",
-            "PKG_CONFIG_GOBJECT_INTROSPECTION_1_0_TYPELIBDIR": "/app/lib/girepository-1.0"
+            "V": "1"
         }
     },
     "cleanup": ["/include", "/lib/pkgconfig",
@@ -38,13 +36,23 @@
                 "/bin/gnome-documents"],
     "modules": [
         {
-            "name": "gnome-online-accounts",
-            "config-opts": ["--disable-telepathy", "--disable-documentation", "--disable-backend"],
+            "name": "librest",
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.26/gnome-online-accounts-3.26.0.tar.xz",
-                    "sha256": "5cab736751c19efca762c0459e3358255d6662a6f4f27728cd02ea7b024e52ac"
+                    "url": "https://download.gnome.org/sources/rest/0.8/rest-0.8.1.tar.xz",
+                    "sha256": "0513aad38e5d3cedd4ae3c551634e3be1b9baaa79775e53b2dba9456f15b01c9"
+                }
+            ]
+        },
+        {
+            "name": "gnome-online-accounts",
+            "config-opts": ["--disable-telepathy", "--disable-documentation", "--disable-backend", "--disable-Werror" ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.30/gnome-online-accounts-3.30.0.tar.xz",
+                    "sha256": "27d9d88942aa02a1f8d003dfe515483d8483f216ba1e297a8ef67a42cf4bcfc3"
                 }
             ]
         },
@@ -54,13 +62,14 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-desktop/3.26/gnome-desktop-3.26.2.tar.xz",
-                    "sha256": "f7561a7a313fc474b2c390cd9696df1f5c1e1556080e43f4afe042b1060e5f2a"
+                    "url": "https://download.gnome.org/sources/gnome-desktop/3.30/gnome-desktop-3.30.1.tar.xz",
+                    "sha256": "1383703bedd71204e4a161fb163905410c8f651890f18b3fa8405506ba97789f"
                 }
             ]
         },
         {
             "name": "liboauth",
+            "config-opts": [ "--enable-nss" ],
             "sources": [
                 {
                     "type": "archive",
@@ -81,16 +90,6 @@
             ]
         },
         {
-            "name": "librest",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/rest/0.8/rest-0.8.1.tar.xz",
-                    "sha256": "0513aad38e5d3cedd4ae3c551634e3be1b9baaa79775e53b2dba9456f15b01c9"
-                }
-            ]
-        },
-        {
             "name": "libzapojit",
             "sources": [
                 {
@@ -107,22 +106,40 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://poppler.freedesktop.org/poppler-data-0.4.8.tar.gz",
-                    "sha256": "1096a18161f263cccdc6d8a2eb5548c41ff8fcf9a3609243f1b6296abdf72872"
+                    "url": "https://poppler.freedesktop.org/poppler-data-0.4.9.tar.gz	",
+                    "sha256": "1f9c7e7de9ecd0db6ab287349e31bf815ca108a5a175cf906a90163bdbe32012"
                 }
             ]
         },
         {
             "name": "poppler",
             "buildsystem": "cmake-ninja",
-            "config-opts": ["-DCMAKE_INSTALL_LIBDIR=/app/lib", "-DCMAKE_INSTALL_INCLUDEDIR=/app/include",
-                            "-DENABLE_LIBOPENJPEG=none"],
-            "cleanup": [ "/bin" ],
+            "config-opts": [
+                "-DCMAKE_INSTALL_LIBDIR=/app/lib",
+                "-DCMAKE_INSTALL_INCLUDEDIR=/app/include",
+                "-DENABLE_LIBOPENJPEG=none"
+            ],
+            "cleanup": [
+                "/bin"
+            ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "http://poppler.freedesktop.org/poppler-0.61.0.tar.xz",
-                    "sha256": "53cde17a2afa3b73eb8b209d24e4369b52bfac444065dbb0a8cbcc7356582b7f"
+                    "url": "https://poppler.freedesktop.org/poppler-0.69.0.tar.xz",
+                    "sha256": "637ff943f805f304ff1da77ba2e7f1cbd675f474941fd8ae1e0fc01a5b45a3f9"
+                }
+            ]
+        },
+        {
+            "name": "gspell",
+            "cleanup": [
+                "/bin"
+            ],
+            "sources": [
+                {
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/gspell/1.8/gspell-1.8.1.tar.xz",
+                    "sha256": "819a1d23c7603000e73f5e738bdd284342e0cd345fb0c7650999c31ec741bbe5"
                 }
             ]
         },
@@ -131,49 +148,62 @@
             "cleanup": [ "/share/GConf", "/share/help" ],
             "config-opts": [ "--disable-nautilus", "--disable-viewer",
                              "--disable-previewer", "--disable-dbus",
-                             "--disable-browser-plugin", "--enable-introspection" ],
+                             "--disable-browser-plugin", "--enable-introspection",
+                             "--enable-comics" ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/evince/3.26/evince-3.26.0.tar.xz",
-                    "sha256": "79567bdb743cf0c3ed7b638da32afc9b850298f9b4edd532455df4a7e2a4c9d8"
+                    "url": "https://download.gnome.org/sources/evince/3.30/evince-3.30.1.tar.xz",
+                    "sha256": "abc5516848e743bd79645e9693250974ffd5235617dd746c83b67c4c671ac0b7"
                 }
             ]
         },
         {
-            "name": "tracker",
-            "cleanup": [ "/bin", "/etc", "/libexec" ],
-            "config-opts": [ "--disable-miner-apps", "--disable-static",
-                             "--disable-tracker-extract", "--disable-tracker-needle",
-                             "--disable-tracker-preferences", "--disable-artwork",
-                             "--disable-tracker-writeback", "--disable-miner-user-guides",
-                             "--with-bash-completion-dir=no"],
-            "sources": [
+            "name" : "tracker",
+            "config-opts" : [
+                "--disable-miner-apps",
+                "--disable-static",
+                "--disable-tracker-extract",
+                "--disable-tracker-needle",
+                "--disable-tracker-preferences",
+                "--disable-artwork",
+                "--disable-tracker-writeback",
+                "--disable-miner-user-guides",
+                "--with-bash-completion-dir=no"
+            ],
+            "sources" : [
                 {
-                   "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker/2.0/tracker-2.0.1.tar.xz",
-                    "sha256": "ac5c9f4dbb0741af5877ae2818d8c053aa9a431477a924a17976bb7e44411e47"
+                    "type" : "archive",
+                    "url" : "https://download.gnome.org/sources/tracker/2.1/tracker-2.1.5.tar.xz",
+                    "sha256" : "b234b7573773b904dc3e885ff5ec44e86b035767cde783bc50d65d12cd72861e"
                 }
             ]
         },
         {
             "name": "tracker-miners",
-            "config-opts": [ ],
+            "cleanup": [ "/bin", "/etc", "/lib/systemd", "/libexec" ],
+            "config-opts": [ "--disable-miner-apps",
+                             "--disable-miner-rss",
+                             "--disable-static",
+                             "--disable-tracker-extract",
+                             "--disable-tracker-writeback",
+                             "--enable-miner-fs" ],
             "sources": [
                 {
-                   "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker-miners/2.0/tracker-miners-2.0.2.tar.xz",
-                    "sha256": "cf417ece944c997f630dda41a7f5c449d609fa53dbb34fae7caa4c7af1e0e8ef"
+                    "type": "archive",
+                    "url": "https://download.gnome.org/sources/tracker-miners/2.1/tracker-miners-2.1.5.tar.xz",
+                    "sha256": "f5fd3d4b5573539554d5982ee8ecc10ea84f6693378c5bcc7b162096a63bb8cd"
                 }
             ]
         },
         {
             "name": "libgepub",
+            "buildsystem": "meson",
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/libgepub/0.5/libgepub-0.5.2.tar.xz",
-                    "sha256": "848328999285441739a18664f62e8008aef8d87d1da00aeb91138035fc672b38"
+                    "url": "https://download.gnome.org/sources/libgepub/0.6/libgepub-0.6.0.tar.xz",
+                    "sha256": "c78a395cc1d9c57b4485958ed83ffb96ed442750cfafa7797dd6d986b9f7b399"
                 }
             ]
         },
@@ -189,12 +219,13 @@
         },
         {
             "name": "gnome-books",
-            "config-opts": [ "--disable-documentation"],
+            "buildsystem": "meson",
+            "config-opts": [ "-Denable-documentation=false" ],
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-documents/3.26/gnome-documents-3.26.1.tar.xz",
-                    "sha256": "ba0d3084359d666b90733bb43206d24190fa85304bfe45f674ab6e6a27cb7fc9"
+                    "url": "https://download.gnome.org/sources/gnome-documents/3.30/gnome-documents-3.30.0.tar.xz",
+                    "sha256": "066a4aba215926d5c5b0db1c083eba3e40c2a888c9017973af8faac4ae9c907d"
                 }
             ]
         }
