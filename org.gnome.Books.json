@@ -14,87 +14,47 @@
         "--filesystem=xdg-documents:ro", "--filesystem=xdg-download:ro",
         /* Needs to talk to the network: */
         "--share=network",
-        /* Tracker access */
+        /* Tracker D-Bus access */
         "--talk-name=org.freedesktop.Tracker1",
         "--talk-name=org.freedesktop.Tracker1.Miner.Extract",
+        "--env=TRACKER_SPARQL_BACKEND=bus",
+        /* For the WebP loader */
+        "--env=GDK_PIXBUF_MODULE_FILE=/app/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache",
         /* Needed for dconf to work */
         "--filesystem=xdg-run/dconf", "--filesystem=~/.config/dconf:ro",
         "--talk-name=ca.desrt.dconf", "--env=DCONF_USER_CONFIG_DIR=.config/dconf"
     ],
-    "build-options" : {
-        "env": {
-            "V": "1"
-        }
-    },
-    "cleanup": ["/include", "/lib/pkgconfig",
-                "/share/pkgconfig", "/share/aclocal",
-                "/man", "/share/man", "/share/gtk-doc",
-                "/share/vala",
-                "*.la", "*.a",
-                "/bin/gnome-documents"],
+    "cleanup": [ "/include", "/lib/pkgconfig",
+                 "/share/pkgconfig", "/share/aclocal",
+                 "/man", "/share/man", "/share/gtk-doc",
+                 "/share/vala",
+                 "*.la", "*.a" ],
     "modules": [
-        {
-            "name": "librest",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/rest/0.8/rest-0.8.1.tar.xz",
-                    "sha256": "0513aad38e5d3cedd4ae3c551634e3be1b9baaa79775e53b2dba9456f15b01c9"
-                }
-            ]
-        },
-        {
-            "name": "gnome-online-accounts",
-            "config-opts": ["--disable-telepathy", "--disable-documentation", "--disable-backend", "--disable-Werror" ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-online-accounts/3.30/gnome-online-accounts-3.30.0.tar.xz",
-                    "sha256": "27d9d88942aa02a1f8d003dfe515483d8483f216ba1e297a8ef67a42cf4bcfc3"
-                }
-            ]
-        },
         {
             "name": "gnome-desktop",
             "config-opts": ["--disable-debug-tools", "--disable-udev"],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-desktop/3.30/gnome-desktop-3.30.1.tar.xz",
-                    "sha256": "1383703bedd71204e4a161fb163905410c8f651890f18b3fa8405506ba97789f"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/gnome-desktop.git",
+                    "tag": "3.30.2",
+                    "commit": "8b7e4d1986450c4991e03de6b32bc98ee4f13c21"
                 }
             ]
         },
         {
-            "name": "liboauth",
-            "config-opts": [ "--enable-nss" ],
+            "name": "webp-pixbuf-loader",
+            "buildsystem": "cmake-ninja",
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "http://netix.dl.sourceforge.net/project/liboauth/liboauth-1.0.3.tar.gz",
-                    "sha256": "0df60157b052f0e774ade8a8bac59d6e8d4b464058cc55f9208d72e41156811f"
+                    "type": "git",
+                    "url": "https://github.com/aruiz/webp-pixbuf-loader.git",
+                    "commit": "9b92950d49d7939f90ba7413deb7ec6b392b2054"
                 }
-            ]
-        },
-        {
-            "name": "libgdata",
-            "config-opts": ["--disable-always-build-tests", "--disable-Werror", "--disable-static" ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/libgdata/0.17/libgdata-0.17.9.tar.xz",
-                    "sha256": "85c4f7674c0098ffaf060ae01b6b832cb277b3673d54ace3bdedaad6b127453a"
-                }
-            ]
-        },
-        {
-            "name": "libzapojit",
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/libzapojit/0.0/libzapojit-0.0.3.tar.xz",
-                    "sha256": "3d25f99329105abb99d1e9651b0aa1842065456ea54c22970a7330e9f3d1c37e"
-                }
+            ],
+            "post-install": [
+                "GDK_PIXBUF_MODULEDIR=/app/lib/gdk-pixbuf-2.0/2.10.0/loaders/ gdk-pixbuf-query-loaders > loaders.cache",
+                "cat /usr/lib/*/gdk-pixbuf-2.0/2.10.0/loaders.cache loaders.cache > /app/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache"
             ]
         },
         {
@@ -135,9 +95,10 @@
             ],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gspell/1.8/gspell-1.8.1.tar.xz",
-                    "sha256": "819a1d23c7603000e73f5e738bdd284342e0cd345fb0c7650999c31ec741bbe5"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/gspell.git",
+                    "tag": "1.8.1",
+                    "commit": "ba03499234037861e01ce1e83075e8a32b9790f3"
                 }
             ]
         },
@@ -150,47 +111,49 @@
                              "--enable-comics" ],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/evince/3.30/evince-3.30.1.tar.xz",
-                    "sha256": "abc5516848e743bd79645e9693250974ffd5235617dd746c83b67c4c671ac0b7"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/evince.git",
+                    "tag": "3.30.2",
+                    "commit": "d1cef98aecbc490dbea72323e4e75af5fcc2f5d8"
                 }
             ]
         },
         {
-            "name" : "tracker",
-            "config-opts" : [
-                "--disable-miner-apps",
-                "--disable-static",
-                "--disable-tracker-extract",
-                "--disable-tracker-needle",
-                "--disable-tracker-preferences",
-                "--disable-artwork",
-                "--disable-tracker-writeback",
-                "--disable-miner-user-guides",
-                "--with-bash-completion-dir=no"
-            ],
-            "sources" : [
+            "name": "tracker",
+            "buildsystem": "meson",
+            "cleanup": [ "/bin", "/etc", "/lib/systemd", "/libexec", "/share/dbus-1/services" ],
+            "config-opts": [ "--default-library=shared", "-Dbash-completion=no", "-Ddocs=false", "-Dsystemd_user_services=no" ],
+            "sources": [
                 {
-                    "type" : "archive",
-                    "url" : "https://download.gnome.org/sources/tracker/2.1/tracker-2.1.5.tar.xz",
-                    "sha256" : "b234b7573773b904dc3e885ff5ec44e86b035767cde783bc50d65d12cd72861e"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/tracker.git",
+                    "tag": "2.1.6",
+                    "commit": "e3dc415c9c71515a7402327c0d1b612f1ade042f"
+                },
+                {
+                    "type": "patch",
+                    "path": "0001-build-Fix-build-order-with-libtracker-sparql-generat.patch"
                 }
             ]
         },
         {
             "name": "tracker-miners",
+            "buildsystem": "meson",
             "cleanup": [ "/bin", "/etc", "/lib/systemd", "/libexec" ],
-            "config-opts": [ "--disable-miner-apps",
-                             "--disable-miner-rss",
-                             "--disable-static",
-                             "--disable-tracker-extract",
-                             "--disable-tracker-writeback",
-                             "--enable-miner-fs" ],
+            "config-opts": [ "--default-library=shared",
+                             "-Dminer_apps=false",
+                             "-Dminer_rss=false",
+                             "-Dextract=false",
+                             "-Dgeneric_media_extractor=none",
+                             "-Dwriteback=false",
+                             "-Dminer_fs=true",
+                             "-Ddbus_services=/app/share/dbus-1/services/" ],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/tracker-miners/2.1/tracker-miners-2.1.5.tar.xz",
-                    "sha256": "f5fd3d4b5573539554d5982ee8ecc10ea84f6693378c5bcc7b162096a63bb8cd"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/tracker-miners.git",
+                    "tag": "2.1.5",
+                    "commit": "84321f0e1468175c92da92006a2e960fba22a359"
                 }
             ]
         },
@@ -199,9 +162,10 @@
             "buildsystem": "meson",
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/libgepub/0.6/libgepub-0.6.0.tar.xz",
-                    "sha256": "c78a395cc1d9c57b4485958ed83ffb96ed442750cfafa7797dd6d986b9f7b399"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/libgepub.git",
+                    "tag": "0.6.0",
+                    "commit": "ecca0e1e8f2c301b1ea769e618a92125ee934b57"
                 }
             ]
         },
@@ -209,9 +173,10 @@
             "name": "gnome-epub-thumbnailer",
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-epub-thumbnailer/1.5/gnome-epub-thumbnailer-1.5.tar.xz",
-                    "sha256": "308210f5800219f64cae4828e59bb8e6e4c53b888048cf487221aeb4337d791a"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/gnome-epub-thumbnailer.git",
+                    "tag": "1.5",
+                    "commit": "cce8d8e594ef8fe77720ca33656c2f4368cd424a"
                 }
             ]
         },
@@ -221,9 +186,10 @@
             "config-opts": [ "-Denable-documentation=false" ],
             "sources": [
                 {
-                    "type": "archive",
-                    "url": "https://download.gnome.org/sources/gnome-documents/3.30/gnome-documents-3.30.1.tar.xz",
-                    "sha256": "66191078f42adf50e4aa4cfba5a6564afd17e26f2c8fb3d71acd7b2ea29b0ffd"
+                    "type": "git",
+                    "url": "https://gitlab.gnome.org/GNOME/gnome-books.git",
+                    "tag": "3.31.90",
+                    "commit": "1f08878dead80f09070f15cf6e8c1a0c3cf6e1e7"
                 }
             ]
         }
