@@ -183,7 +183,9 @@
             "sources": [
                 {
                     "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/gnome-books.git"
+                    "url": "https://gitlab.gnome.org/GNOME/gnome-books.git",
+                    "tag": "3.31.90",
+                    "commit": "1f08878dead80f09070f15cf6e8c1a0c3cf6e1e7"
                 }
             ]
         }
