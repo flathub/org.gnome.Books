@@ -106,17 +106,17 @@
         },
         {
             "name": "evince",
+            "buildsystem": "meson",
             "cleanup": [ "/share/GConf", "/share/help" ],
-            "config-opts": [ "--disable-nautilus", "--disable-viewer",
-                             "--disable-previewer", "--disable-dbus",
-                             "--disable-browser-plugin", "--enable-introspection",
-                             "--enable-comics" ],
+            "config-opts": [ "-Dnautilus=false", "-Dviewer=false",
+                             "-Dpreviewer=false", "-Ddbus=false",
+                             "-Dbrowser_plugin=false", "-Dintrospection=true",
+                             "-Dcomics=enabled", "-Dpdf=enabled" ],
             "sources": [
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/evince.git",
-                    "tag": "3.30.2",
-                    "commit": "d1cef98aecbc490dbea72323e4e75af5fcc2f5d8"
+                    "commit": "d18f95bc923d5caec4922dfb2f1c2a35edf7e245"
                 }
             ]
         },
