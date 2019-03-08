@@ -187,8 +187,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/gnome-books.git",
-                    "tag": "3.31.91",
-                    "commit": "b3b39373526756aec69146aa1e6a1dcbcc15abce"
+                    "tag": "3.32.0",
+                    "commit": "7975d6f792c9c47fa11f6c94328073fd3c20fd49"
                 }
             ]
         }
