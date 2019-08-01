@@ -175,6 +175,10 @@
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/gnome-books.git",
                     "commit": "61f85f3c63e31d331417ee0dba899a052107510e"
+                },
+                {
+                    "type": "patch",
+                    "path": "add-missing-appdata-elements.patch"
                 }
             ]
         }
