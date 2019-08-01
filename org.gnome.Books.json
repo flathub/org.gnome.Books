@@ -92,27 +92,14 @@
             ]
         },
         {
-            "name": "gspell",
-            "cleanup": [
-                "/bin"
-            ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/gspell.git",
-                    "tag": "1.8.1",
-                    "commit": "ba03499234037861e01ce1e83075e8a32b9790f3"
-                }
-            ]
-        },
-        {
             "name": "evince",
             "buildsystem": "meson",
             "cleanup": [ "/share/GConf", "/share/help" ],
             "config-opts": [ "-Dnautilus=false", "-Dviewer=false",
                              "-Dpreviewer=false", "-Ddbus=false",
                              "-Dbrowser_plugin=false", "-Dintrospection=true",
-                             "-Dcomics=enabled", "-Dpdf=enabled" ],
+                             "-Dcomics=enabled", "-Dpdf=enabled",
+                             "-Dgspell=disabled" ],
             "sources": [
                 {
                     "type": "git",
