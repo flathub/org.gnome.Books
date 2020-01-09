@@ -118,8 +118,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/tracker.git",
-                    "tag": "2_2_0",
-                    "commit": "b70b9e159538852f9a8cd267ad5d4d0b57fd8074"
+                    "tag": "2.2.2",
+                    "commit": "86b8ead94210b5ee487ce48c0030fc3e4fa87c82"
                 }
             ]
         },
@@ -139,8 +139,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/tracker-miners.git",
-                    "tag": "2.2.0",
-                    "commit": "b7ca63adbdf264797ebdc7259db648ff9be173c0"
+                    "tag": "2.2.2",
+                    "commit": "afb0d92182b89181b46885fa7afb13abc307c898"
                 }
             ]
         },
