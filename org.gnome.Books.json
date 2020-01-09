@@ -1,7 +1,7 @@
 {
     "app-id": "org.gnome.Books",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.32",
+    "runtime-version": "3.34",
     "branch": "stable",
     "sdk": "org.gnome.Sdk",
     "command": "gnome-books",
@@ -123,6 +123,7 @@
                 }
             ]
         },
+        "shared-modules/intltool/intltool-0.51.json",
         {
             "name": "tracker-miners",
             "buildsystem": "meson",
