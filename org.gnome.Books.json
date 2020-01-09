@@ -162,8 +162,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/gnome-epub-thumbnailer.git",
-                    "tag": "1.5",
-                    "commit": "cce8d8e594ef8fe77720ca33656c2f4368cd424a"
+                    "tag": "1.6",
+                    "commit": "0211ca3c1f11a2c49f3df1aacb33108846b52ef0"
                 }
             ]
         },
