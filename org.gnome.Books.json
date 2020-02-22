@@ -1,7 +1,7 @@
 {
     "app-id": "org.gnome.Books",
     "runtime": "org.gnome.Platform",
-    "runtime-version": "3.32",
+    "runtime-version": "3.34",
     "branch": "stable",
     "sdk": "org.gnome.Sdk",
     "command": "gnome-books",
@@ -99,12 +99,13 @@
                              "-Dpreviewer=false", "-Ddbus=false",
                              "-Dbrowser_plugin=false", "-Dintrospection=true",
                              "-Dcomics=enabled", "-Dpdf=enabled",
-                             "-Dgspell=disabled" ],
+                             "-Dgspell=disabled", "-Dgtk_doc=false" ],
             "sources": [
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/evince.git",
-                    "commit": "d18f95bc923d5caec4922dfb2f1c2a35edf7e245"
+                    "commit": "f04ad76b698c1f80854bd21b00250d05fed64435",
+                    "tag": "3.34.2"
                 }
             ]
         },
@@ -117,11 +118,12 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/tracker.git",
-                    "tag": "2_2_0",
-                    "commit": "b70b9e159538852f9a8cd267ad5d4d0b57fd8074"
+                    "tag": "2.2.2",
+                    "commit": "86b8ead94210b5ee487ce48c0030fc3e4fa87c82"
                 }
             ]
         },
+        "shared-modules/intltool/intltool-0.51.json",
         {
             "name": "tracker-miners",
             "buildsystem": "meson",
@@ -138,8 +140,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/tracker-miners.git",
-                    "tag": "2.2.0",
-                    "commit": "b7ca63adbdf264797ebdc7259db648ff9be173c0"
+                    "tag": "2.2.2",
+                    "commit": "afb0d92182b89181b46885fa7afb13abc307c898"
                 }
             ]
         },
@@ -161,8 +163,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/gnome-epub-thumbnailer.git",
-                    "tag": "1.5",
-                    "commit": "cce8d8e594ef8fe77720ca33656c2f4368cd424a"
+                    "tag": "1.6",
+                    "commit": "0211ca3c1f11a2c49f3df1aacb33108846b52ef0"
                 }
             ]
         },
