@@ -7,7 +7,7 @@
     "command": "gnome-books",
     "finish-args": [
         /* X11 + XShm access */
-        "--share=ipc", "--socket=x11",
+        "--share=ipc", "--socket=fallback-x11",
         /* Wayland access */
         "--socket=wayland",
         /* OpenGL access */
@@ -40,8 +40,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/gnome-desktop.git",
-                    "tag": "3.31.91",
-                    "commit": "361885a1234014177dc00327beaeee43b19c1e0b"
+                    "tag": "3.34.4",
+                    "commit": "712bebc83de036588e7416706a4efa88104e1f0f"
                 }
             ]
         },
@@ -73,32 +73,13 @@
             ]
         },
         {
-            "name": "poppler",
-            "buildsystem": "cmake-ninja",
-            "config-opts": [
-                "-DCMAKE_INSTALL_LIBDIR=/app/lib",
-                "-DCMAKE_INSTALL_INCLUDEDIR=/app/include",
-                "-DENABLE_LIBOPENJPEG=none"
-            ],
-            "cleanup": [
-                "/bin"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://poppler.freedesktop.org/poppler-0.69.0.tar.xz",
-                    "sha256": "637ff943f805f304ff1da77ba2e7f1cbd675f474941fd8ae1e0fc01a5b45a3f9"
-                }
-            ]
-        },
-        {
             "name": "evince",
             "buildsystem": "meson",
             "cleanup": [ "/share/GConf", "/share/help" ],
             "config-opts": [ "-Dnautilus=false", "-Dviewer=false",
                              "-Dpreviewer=false", "-Ddbus=false",
                              "-Dbrowser_plugin=false", "-Dintrospection=true",
-                             "-Dcomics=enabled", "-Dpdf=enabled",
+                             "-Dcomics=enabled", "-Dpdf=disabled",
                              "-Dgspell=disabled", "-Dgtk_doc=false" ],
             "sources": [
                 {
