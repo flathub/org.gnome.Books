@@ -73,32 +73,13 @@
             ]
         },
         {
-            "name": "poppler",
-            "buildsystem": "cmake-ninja",
-            "config-opts": [
-                "-DCMAKE_INSTALL_LIBDIR=/app/lib",
-                "-DCMAKE_INSTALL_INCLUDEDIR=/app/include",
-                "-DENABLE_LIBOPENJPEG=none"
-            ],
-            "cleanup": [
-                "/bin"
-            ],
-            "sources": [
-                {
-                    "type": "archive",
-                    "url": "https://poppler.freedesktop.org/poppler-0.69.0.tar.xz",
-                    "sha256": "637ff943f805f304ff1da77ba2e7f1cbd675f474941fd8ae1e0fc01a5b45a3f9"
-                }
-            ]
-        },
-        {
             "name": "evince",
             "buildsystem": "meson",
             "cleanup": [ "/share/GConf", "/share/help" ],
             "config-opts": [ "-Dnautilus=false", "-Dviewer=false",
                              "-Dpreviewer=false", "-Ddbus=false",
                              "-Dbrowser_plugin=false", "-Dintrospection=true",
-                             "-Dcomics=enabled", "-Dpdf=enabled",
+                             "-Dcomics=enabled", "-Dpdf=disabled",
                              "-Dgspell=disabled", "-Dgtk_doc=false" ],
             "sources": [
                 {
