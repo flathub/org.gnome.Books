@@ -99,8 +99,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/tracker.git",
-                    "tag": "2.2.2",
-                    "commit": "86b8ead94210b5ee487ce48c0030fc3e4fa87c82"
+                    "tag": "2.3.4",
+                    "commit": "1fab9a0bf547cc2d12b743b53f0df8423d36e83d"
                 }
             ]
         },
@@ -110,7 +110,6 @@
             "buildsystem": "meson",
             "cleanup": [ "/bin", "/etc", "/lib/systemd", "/libexec" ],
             "config-opts": [ "--default-library=shared",
-                             "-Dminer_apps=false",
                              "-Dminer_rss=false",
                              "-Dextract=false",
                              "-Dgeneric_media_extractor=none",
@@ -121,8 +120,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/tracker-miners.git",
-                    "tag": "2.2.2",
-                    "commit": "afb0d92182b89181b46885fa7afb13abc307c898"
+                    "tag": "2.3.3",
+                    "commit": "9a507396dd980a6023f7bc15b18aaeedbd5f2df8"
                 }
             ]
         },
