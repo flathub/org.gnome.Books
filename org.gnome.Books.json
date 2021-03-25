@@ -66,7 +66,12 @@
                 {
                     "type": "archive",
                     "url": "https://poppler.freedesktop.org/poppler-data-0.4.10.tar.gz",
-                    "sha256": "6e2fcef66ec8c44625f94292ccf8af9f1d918b410d5aa69c274ce67387967b30"
+                    "sha256": "6e2fcef66ec8c44625f94292ccf8af9f1d918b410d5aa69c274ce67387967b30",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 3687,
+                        "url-template": "https://poppler.freedesktop.org/poppler-data-$version.tar.gz"
+                    }
                 }
             ]
         },
@@ -85,7 +90,12 @@
                 {
                     "type": "archive",
                     "url": "https://poppler.freedesktop.org/poppler-21.02.0.tar.xz",
-                    "sha256": "5c14759c99891e6e472aced6d5f0ff1dacf85d80cd9026d365c55c653edf792c"
+                    "sha256": "5c14759c99891e6e472aced6d5f0ff1dacf85d80cd9026d365c55c653edf792c",
+                    "x-checker-data": {
+                        "type": "anitya",
+                        "project-id": 3686,
+                        "url-template": "https://poppler.freedesktop.org/poppler-$version.tar.xz"
+                    }
                 }
             ]
         },
