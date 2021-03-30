@@ -155,20 +155,6 @@
                 }
             ]
         },
-        {
-            "name": "tracker",
-            "buildsystem": "meson",
-            "cleanup": [ "/bin", "/etc", "/lib/systemd", "/libexec", "/share/dbus-1/services" ],
-            "config-opts": [ "--default-library=shared", "-Dbash-completion=no", "-Ddocs=false", "-Dsystemd_user_services=no" ],
-            "sources": [
-                {
-                    "type": "git",
-                    "url": "https://gitlab.gnome.org/GNOME/tracker.git",
-                    "tag": "2.2.2",
-                    "commit": "86b8ead94210b5ee487ce48c0030fc3e4fa87c82"
-                }
-            ]
-        },
         "shared-modules/intltool/intltool-0.51.json",
         {
             "name": "tracker-miners",
