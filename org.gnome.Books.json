@@ -217,7 +217,8 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/gnome-books.git",
-                    "commit": "19e03794302d64e277b41bb456f18aa296902e5c"
+                    "commit": "e5a6646a5586f36e0ee3167a77237b4c7eaff8e0",
+                    "tag": "40.0"
                 }
             ]
         }
