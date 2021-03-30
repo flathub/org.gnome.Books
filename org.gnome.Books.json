@@ -155,25 +155,24 @@
                 }
             ]
         },
-        "shared-modules/intltool/intltool-0.51.json",
         {
             "name": "tracker-miners",
             "buildsystem": "meson",
-            "cleanup": [ "/bin", "/etc", "/lib/systemd", "/libexec" ],
-            "config-opts": [ "--default-library=shared",
-                             "-Dminer_apps=false",
-                             "-Dminer_rss=false",
-                             "-Dextract=false",
-                             "-Dgeneric_media_extractor=none",
-                             "-Dwriteback=false",
+            "config-opts": [ "-Ddefault_index_single_directories=&DOWNLOADS",
+                             "-Ddefault_index_recursive_directories=&DOCUMENTS",
+                             "-Ddomain_prefix=org.gnome.Books",
+                             "-Dman=false",
                              "-Dminer_fs=true",
-                             "-Ddbus_services=/app/share/dbus-1/services/" ],
+                             "-Dminer_fs_cache_location=$XDG_CACHE_HOME/org.gnome.Books/miner/files",
+                             "-Dminer_rss=false",
+                             "-Dwriteback=false",
+                             "-Dsystemd_user_services=false" ],
             "sources": [
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/tracker-miners.git",
-                    "tag": "2.2.2",
-                    "commit": "afb0d92182b89181b46885fa7afb13abc307c898"
+                    "commit": "fc4287e213bc3568b3012433b9466d0c207e174d",
+                    "tag": "3.1.0"
                 }
             ]
         },
