@@ -212,7 +212,7 @@
         {
             "name": "gnome-books",
             "buildsystem": "meson",
-            "config-opts": [ "-Denable-documentation=false" ],
+            "config-opts": [ "-Ddocumentation=false" ],
             "sources": [
                 {
                     "type": "git",
