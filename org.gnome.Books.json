@@ -176,8 +176,7 @@
                 {
                     "type": "git",
                     "url": "https://gitlab.gnome.org/GNOME/libgepub.git",
-                    "tag": "0.6.0",
-                    "commit": "ecca0e1e8f2c301b1ea769e618a92125ee934b57"
+                    "commit": "323d502507beba4e9f401a74d4303a648fe1788c"
                 }
             ]
         },
