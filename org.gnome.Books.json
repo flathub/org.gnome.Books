@@ -6,25 +6,33 @@
     "sdk": "org.gnome.Sdk",
     "command": "gnome-books",
     "finish-args": [
-        /* X11 + XShm access */
-        "--share=ipc", "--socket=fallback-x11",
-        /* Wayland access */
+        "--share=ipc",
+        "--socket=fallback-x11",
         "--socket=wayland",
-        /* OpenGL access */
         "--device=dri",
-        /* Read-only access to users documents */
-        "--filesystem=xdg-documents:ro", "--filesystem=xdg-download:ro"
+        "--filesystem=xdg-documents:ro",
+        "--filesystem=xdg-download:ro"
     ],
-    "cleanup": [ "/include", "/lib/pkgconfig",
-                 "/share/pkgconfig", "/share/aclocal",
-                 "/man", "/share/man", "/share/gtk-doc",
-                 "/share/vala",
-                 "*.la", "*.a" ],
+    "cleanup": [
+        "/include",
+        "/lib/pkgconfig",
+        "/share/pkgconfig",
+        "/share/aclocal",
+        "/man",
+        "/share/man",
+        "/share/gtk-doc",
+        "/share/vala",
+        "*.la",
+        "*.a"
+    ],
     "modules": [
         {
             "name": "gnome-desktop",
             "buildsystem": "meson",
-            "config-opts": [ "-Ddebug-tools=disabled", "-Dudev=disabled" ],
+            "config-opts": [
+                "-Ddebug-tools=disabled",
+                "-Dudev=disabled"
+            ],
             "sources": [
                 {
                     "type": "git",
@@ -37,7 +45,9 @@
         {
             "name": "webp-pixbuf-loader",
             "buildsystem": "meson",
-            "config-opts": [ "-Dgdk_pixbuf_moduledir=/app/lib/gnome-books/gdk-pixbuf/2.10.0/" ],
+            "config-opts": [
+                "-Dgdk_pixbuf_moduledir=/app/lib/gnome-books/gdk-pixbuf/2.10.0/"
+            ],
             "sources": [
                 {
                     "type": "git",
@@ -52,7 +62,9 @@
         {
             "name": "popplerdata",
             "no-autogen": true,
-            "make-install-args": ["prefix=/app"],
+            "make-install-args": [
+                "prefix=/app"
+            ],
             "sources": [
                 {
                     "type": "archive",
@@ -80,8 +92,8 @@
             "sources": [
                 {
                     "type": "archive",
-                    "url": "https://poppler.freedesktop.org/poppler-21.02.0.tar.xz",
-                    "sha256": "5c14759c99891e6e472aced6d5f0ff1dacf85d80cd9026d365c55c653edf792c",
+                    "url": "https://poppler.freedesktop.org/poppler-21.03.0.tar.xz",
+                    "sha256": "fd51ead4aac1d2f4684fa6e7b0ec06f0233ed21667e720a4e817e4455dd63d27",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 3686,
@@ -91,18 +103,18 @@
             ]
         },
         {
-            "name" : "djvulibre",
-            "config-opts" : [
+            "name": "djvulibre",
+            "config-opts": [
                 "--disable-desktopfiles"
             ],
-            "cleanup" : [
+            "cleanup": [
                 "/bin"
             ],
-            "sources" : [
+            "sources": [
                 {
-                    "type" : "archive",
-                    "url" : "https://downloads.sourceforge.net/project/djvu/DjVuLibre/3.5.28/djvulibre-3.5.28.tar.gz",
-                    "sha256" : "fcd009ea7654fde5a83600eb80757bd3a76998e47d13c66b54c8db849f8f2edc",
+                    "type": "archive",
+                    "url": "https://downloads.sourceforge.net/project/djvu/DjVuLibre/3.5.28/djvulibre-3.5.28.tar.gz",
+                    "sha256": "fcd009ea7654fde5a83600eb80757bd3a76998e47d13c66b54c8db849f8f2edc",
                     "x-checker-data": {
                         "type": "anitya",
                         "project-id": 10159,
@@ -112,8 +124,8 @@
             ]
         },
         {
-            "name" : "libgsf",
-            "cleanup" : [
+            "name": "libgsf",
+            "cleanup": [
                 "/bin"
             ],
             "sources": [
@@ -128,15 +140,26 @@
         {
             "name": "evince",
             "buildsystem": "meson",
-            "cleanup": [ "/share/GConf", "/share/help" ],
-            "config-opts": [ "-Dnautilus=false", "-Dviewer=false",
-                             "-Dpreviewer=false", "-Ddbus=false",
-                             "-Dbrowser_plugin=false", "-Dintrospection=true",
-                             "-Dcomics=enabled", "-Dpdf=enabled",
-                             "-Ddjvu=enabled",
-                             "-Dgspell=disabled", "-Dgtk_doc=false",
-                             "-Dt1lib=disabled", "-Duser_doc=false",
-                             "-Dthumbnailer=true" ],
+            "cleanup": [
+                "/share/GConf",
+                "/share/help"
+            ],
+            "config-opts": [
+                "-Dnautilus=false",
+                "-Dviewer=false",
+                "-Dpreviewer=false",
+                "-Ddbus=false",
+                "-Dbrowser_plugin=false",
+                "-Dintrospection=true",
+                "-Dcomics=enabled",
+                "-Dpdf=enabled",
+                "-Ddjvu=enabled",
+                "-Dgspell=disabled",
+                "-Dgtk_doc=false",
+                "-Dt1lib=disabled",
+                "-Duser_doc=false",
+                "-Dthumbnailer=true"
+            ],
             "sources": [
                 {
                     "type": "git",
@@ -149,15 +172,17 @@
         {
             "name": "tracker-miners",
             "buildsystem": "meson",
-            "config-opts": [ "-Ddefault_index_single_directories=&DOWNLOADS",
-                             "-Ddefault_index_recursive_directories=&DOCUMENTS",
-                             "-Ddomain_prefix=org.gnome.Books",
-                             "-Dman=false",
-                             "-Dminer_fs=true",
-                             "-Dminer_fs_cache_location=$XDG_CACHE_HOME/org.gnome.Books/miner/files",
-                             "-Dminer_rss=false",
-                             "-Dwriteback=false",
-                             "-Dsystemd_user_services=false" ],
+            "config-opts": [
+                "-Ddefault_index_single_directories=&DOWNLOADS",
+                "-Ddefault_index_recursive_directories=&DOCUMENTS",
+                "-Ddomain_prefix=org.gnome.Books",
+                "-Dman=false",
+                "-Dminer_fs=true",
+                "-Dminer_fs_cache_location=$XDG_CACHE_HOME/org.gnome.Books/miner/files",
+                "-Dminer_rss=false",
+                "-Dwriteback=false",
+                "-Dsystemd_user_services=false"
+            ],
             "sources": [
                 {
                     "type": "git",
@@ -202,7 +227,9 @@
         {
             "name": "gnome-books",
             "buildsystem": "meson",
-            "config-opts": [ "-Ddocumentation=false" ],
+            "config-opts": [
+                "-Ddocumentation=false"
+            ],
             "sources": [
                 {
                     "type": "git",
