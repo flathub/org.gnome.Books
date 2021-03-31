@@ -13,9 +13,7 @@
         /* OpenGL access */
         "--device=dri",
         /* Read-only access to users documents */
-        "--filesystem=xdg-documents:ro", "--filesystem=xdg-download:ro",
-        /* Needs to talk to the network: */
-        "--share=network"
+        "--filesystem=xdg-documents:ro", "--filesystem=xdg-download:ro"
     ],
     "cleanup": [ "/include", "/lib/pkgconfig",
                  "/share/pkgconfig", "/share/aclocal",
